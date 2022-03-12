@@ -1,7 +1,7 @@
 const Card = require('../models/card');
-const { ERR_NOT_FOUND, throwErrors } = require('../utils');
+const { ERR_NOT_FOUND, dropErrors } = require('../utils');
 
-const message = 'Карточка с указанным id не найдена';
+const message = 'Карточка с данным id не найдена';
 
 const getCards = (req, res) => {
   Card.find({})
@@ -9,7 +9,7 @@ const getCards = (req, res) => {
       res.send(cards);
     })
     .catch((err) => {
-      throwErrors(err, res, message);
+      dropErrors(err, res, message);
     });
 };
 
@@ -21,7 +21,7 @@ const createCard = (req, res) => {
       res.send(card);
     })
     .catch((err) => {
-      throwErrors(err, res, message);
+      dropErrors(err, res, message);
     });
 };
 
@@ -35,7 +35,7 @@ const deleteCard = (req, res) => {
       res.send({ message: 'Пост удален.' });
     })
     .catch((err) => {
-      throwErrors(err, res, message);
+      dropErrors(err, res, message);
     });
 };
 
@@ -53,7 +53,7 @@ const likeCard = (req, res) => {
       res.send(card);
     })
     .catch((err) => {
-      throwErrors(err, res, message);
+      dropErrors(err, res, message);
     });
 };
 
@@ -67,7 +67,7 @@ const dislikeCard = (req, res) => {
       res.send(card);
     })
     .catch((err) => {
-      throwErrors(err, res, message);
+      dropErrors(err, res, message);
     });
 };
 module.exports = {

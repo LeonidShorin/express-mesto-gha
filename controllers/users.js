@@ -1,9 +1,9 @@
 const User = require('../models/user');
 const {
-  ERR_NOT_FOUND, ERR_INCORRECT_DATA, ERR_SERVER_ERROR, throwErrors,
+  ERR_NOT_FOUND, ERR_INCORRECT_DATA, ERR_SERVER_ERROR, dropErrors,
 } = require('../utils');
 
-const message = 'Пользователь c данным id не найден';
+const message = 'Пользователь с данным id не найден';
 
 const getUsers = (req, res) => {
   User.find({})
@@ -26,7 +26,7 @@ const getUserById = (req, res) => {
       res.send(user);
     })
     .catch((err) => {
-      throwErrors(err, res, message);
+      dropErrors(err, res, message);
     });
 };
 const createUser = (req, res) => {
@@ -44,7 +44,7 @@ const createUser = (req, res) => {
       res.send(user);
     })
     .catch((err) => {
-      throwErrors(err, res, message);
+      dropErrors(err, res, message);
     });
 };
 const updateUserProfile = (req, res) => {
@@ -68,7 +68,7 @@ const updateUserProfile = (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      throwErrors(err, res, message);
+      dropErrors(err, res, message);
     });
 };
 const updateUserAvatar = (req, res) => {
@@ -82,7 +82,7 @@ const updateUserAvatar = (req, res) => {
       res.send(user);
     })
     .catch((err) => {
-      throwErrors(err, res, message);
+      dropErrors(err, res, message);
     });
 };
 

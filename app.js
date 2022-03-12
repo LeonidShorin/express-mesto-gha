@@ -10,6 +10,8 @@ const cardRouter = require('./routes/cards');
 async function start() {
   await mongoose.connect('mongodb://localhost:27017/mestodb', {
     useNewUrlParser: true,
+    // useCreateIndex: true, // error
+    // useFindAndModify: false, // error
   });
   app.listen(PORT, () => {
     console.log(`App listening on PORT ${PORT}`);
@@ -22,7 +24,7 @@ start()
     app.use(express.urlencoded({ extended: true }));
     app.use((req, res, next) => {
       req.user = {
-        _id: '622af57d91f86803ddb12e37',
+        _id: '622b547327993c1bd4a57e8a',
       };
       next();
     });
