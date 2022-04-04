@@ -2,6 +2,7 @@ const Card = require('../models/card');
 
 const ForbiddenError = require('../errors/ForbiddenError');
 const NotFoundError = require('../errors/NotFoundError');
+const BadRequestError = require('../errors/NotFoundError');
 
 const getCards = (req, res, next) => {
   Card.find({})
@@ -39,7 +40,13 @@ const deleteCard = (req, res, next) => {
           res.send({ message: 'Карточка удалена.' });
         });
     })
-    .catch(next);
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        next(new BadRequestError('Переданы некорректные данные'));
+      } else {
+        next(err);
+      }
+    });
 };
 
 const likeCard = (req, res, next) => {
@@ -56,7 +63,11 @@ const likeCard = (req, res, next) => {
       res.send(card);
     })
     .catch((err) => {
-      next(err);
+      if (err.name === 'CastError') {
+        next(new BadRequestError('Переданы некорректные данные'));
+      } else {
+        next(err);
+      }
     });
 };
 
@@ -70,7 +81,11 @@ const dislikeCard = (req, res, next) => {
       res.send(card);
     })
     .catch((err) => {
-      next(err);
+      if (err.name === 'CastError') {
+        next(new BadRequestError('Переданы некорректные данные'));
+      } else {
+        next(err);
+      }
     });
 };
 module.exports = {
